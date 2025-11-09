@@ -11,8 +11,8 @@ namespace Bank_Accounts_App
         //declaring what defines a bank account
         public string Owner { get; set; }
         public Guid AccountNumber { get; set; }
-        //using encapsulation to ensure Balance can not be set outside of this class
-        public decimal Balance { get; private set; }
+        //using encapsulation to ensure Balance can not be set outside of this class/child classes
+        public decimal Balance { get; protected set; }
 
         //constructor
         public BankAccount(string owner) 
@@ -23,7 +23,8 @@ namespace Bank_Accounts_App
         
         }
 
-        public string Deposit(decimal amount)
+        //creating Deposit method - virtual lets us use child method if applicable instead
+        public virtual string Deposit(decimal amount)
         {
             if (amount <= 0)
             {
@@ -39,6 +40,7 @@ namespace Bank_Accounts_App
         
         }
 
+        //creating Withdraw method
         public string Withdraw(decimal amount)
         {
             if (amount <= 0)

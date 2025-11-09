@@ -20,11 +20,15 @@ namespace Bank_Accounts_App
                 return;
             }
 
-            BankAccount bankAccount = new BankAccount(OwnerTxt.Text); //grabs text from Owner Label
-            BankAccounts.Add(bankAccount); //adds text from Owner using above + Account Number and Balance from constructor
+            if (InterestRateNum.Value > 0)
+                BankAccounts.Add(new SavingsAccount(OwnerTxt.Text, InterestRateNum.Value)); 
+            
+            else
+                BankAccounts.Add(new BankAccount(OwnerTxt.Text)); 
+                
             RefreshGrid(); //calls Refresh Grid method
-
             OwnerTxt.Text = string.Empty; //clears text box after submitting new bank account
+            InterestRateNum.Value = 0;
 
         }
         private void RefreshGrid()
@@ -35,7 +39,7 @@ namespace Bank_Accounts_App
 
         private void DepositBtn_Click(object sender, EventArgs e)
         {
-            
+
             if (BankAccountsGrid.SelectedRows.Count == 1)
             {
                 //grabs selected row > retrieves data > converts it to BankAccount type
@@ -65,6 +69,11 @@ namespace Bank_Accounts_App
                 AmountNum.Value = 0;
                 MessageBox.Show(message);
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
